@@ -15,7 +15,7 @@ public class DirectorioTelefonico {
     this.nombreD = nombreD;
     }
     public void agregarContacto(Cliente c, long numero){
-        clientela.put(numero, c);//añadimos cliente al arreglo
+        clientela.put(numero, c);//añadimos el cliente al arreglo
     }
     public void buscarContacto(Long numero){
         for(Map.Entry<Long, Cliente> c: clientela.entrySet()){
@@ -31,16 +31,16 @@ public class DirectorioTelefonico {
           }
       }
             
-        
     }
     public ArrayList buscarContactos(String ciudad){
         for(Cliente c: clientela.values()){
-            if(c.getCiudad().equals(ciudad)){
-            clientes.add(c);
+            if(c.getCiudad().equals(ciudad)){//si el valor coinicide con el parametor
+            clientes.add(c);//se agrega al arrayList
             }
-        }
+        }//luego retorna la lista con las personas que estan en determinada ciudad.
         return clientes;
     }
+    
    public void borrarContacto(long numero){
    clientela.remove(numero);
    }
