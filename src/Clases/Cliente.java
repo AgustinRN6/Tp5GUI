@@ -10,8 +10,9 @@ public class Cliente {
     private String ciudad;
     private String direccion;
 
-    public Cliente(String nombre, int dni, String ciudad, String direccion){
+    public Cliente(String nombre,String apellido, int dni, String ciudad, String direccion){
         this.nombre = nombre;
+        this.apellido = apellido;
         this.dni = dni;
         this.ciudad = ciudad;
         this.direccion = direccion;
@@ -58,6 +59,7 @@ public class Cliente {
     }
     
     
+    @Override
     public String toString(){
         return "Nombre: "+nombre+", Dni: "+dni+",Ciudad: "+ciudad+",Direccion:"+direccion;
     }
