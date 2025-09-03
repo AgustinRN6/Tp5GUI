@@ -8,12 +8,12 @@ package Visual;
  *
  * @author Agustin
  */
-public class Directorio extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form Directorio
      */
-    public Directorio() {
+    public MenuPrincipal() {
         initComponents();
     }
 
@@ -36,8 +36,9 @@ public class Directorio extends javax.swing.JFrame {
         jmiBuscarClientePorCiudad = new javax.swing.JMenuItem();
         jmiBuscarClientePorApellido = new javax.swing.JMenuItem();
         jmCiudades = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmiAgregarCiudad = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
+        jmiExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,12 +98,21 @@ public class Directorio extends javax.swing.JFrame {
 
         jmCiudades.setText("Ciudades");
 
-        jMenuItem3.setText("jMenuItem3");
-        jmCiudades.add(jMenuItem3);
+        jmiAgregarCiudad.setText("Agregar Ciudad");
+        jmCiudades.add(jmiAgregarCiudad);
 
         jmMenu.add(jmCiudades);
 
         jmSalir.setText("Salir");
+
+        jmiExit.setText("Exit");
+        jmiExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiExitActionPerformed(evt);
+            }
+        });
+        jmSalir.add(jmiExit);
+
         jmMenu.add(jmSalir);
 
         setJMenuBar(jmMenu);
@@ -137,6 +147,12 @@ public class Directorio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jmiBuscarClientePorApellidoActionPerformed
 
+    private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
+        // TODO add your handling code here:
+        System.out.println(evt.getActionCommand());
+        System.exit(0);
+    }//GEN-LAST:event_jmiExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -154,36 +170,38 @@ public class Directorio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Directorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Directorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Directorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Directorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Directorio().setVisible(true);
+                new MenuPrincipal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jmCiudades;
     private javax.swing.JMenu jmClientes;
     private javax.swing.JMenu jmDirectorio;
     private javax.swing.JMenuBar jmMenu;
     private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenuItem jmiAgregarCiudad;
     private javax.swing.JMenuItem jmiAgregarCliente;
     private javax.swing.JMenuItem jmiBorrarCliente;
     private javax.swing.JMenuItem jmiBuscarCliente;
     private javax.swing.JMenuItem jmiBuscarClientePorApellido;
     private javax.swing.JMenuItem jmiBuscarClientePorCiudad;
+    private javax.swing.JMenuItem jmiExit;
     // End of variables declaration//GEN-END:variables
 }
