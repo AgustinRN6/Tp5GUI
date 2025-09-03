@@ -47,13 +47,15 @@ public class DirectorioTelefonico {
         }
     }
 
-    public ArrayList<Cliente> buscarContactos(String ciudad) {
+    public void buscarContactos(String ciudad) {
         for (Cliente c : clientela.values()) {
             if (c.getCiudad().equals(ciudad)) {//si el valor coinicide con el parametor
                 clientes.add(c);//se agrega al arrayList
             }
         }//luego retorna la lista con las personas que estan en determinada ciudad.
-        return clientes;
+        for(Cliente c: clientes){
+            System.out.println(c.toString());
+        }
     }
 
     public void borrarContacto(long numero) {

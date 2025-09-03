@@ -18,9 +18,8 @@ public class Main {
         t1.agregarContacto(c4, 23333333);
         //metodo de buscar
         t1.buscarContacto(266510);
-        t1.buscarContactos("San Luis");
-        
         t1.buscarTelefono("Dominguez");
+        t1.buscarContactos("Villa Mercedez");
         t1.borrarContacto(2342211);
         
     }
