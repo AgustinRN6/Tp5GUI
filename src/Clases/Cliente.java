@@ -1,16 +1,14 @@
-
 package Clases;
 
-
-
 public class Cliente {
+
     private String nombre;
     private String apellido;
     private int dni;
     private String ciudad;
     private String direccion;
 
-    public Cliente(String nombre,String apellido, int dni, String ciudad, String direccion){
+    public Cliente(String nombre, String apellido, int dni, String ciudad, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -58,9 +56,9 @@ public class Cliente {
         this.direccion = direccion;
     }
     
-    
     @Override
-    public String toString(){
-        return "Nombre: "+nombre+", Dni: "+dni+",Ciudad: "+ciudad+",Direccion:"+direccion;
+    public String toString() {
+        return "Nombre: " + nombre + ", Dni: " + dni + ", Ciudad: " + ciudad + ", Direccion: " + direccion;
     }
+    
 }

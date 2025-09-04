@@ -4,7 +4,7 @@
  */
 package Visual;
 
-import Visual.MenuPrincipal;
+import Visual.Menu;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,7 +110,7 @@ public class AgregarCiudad extends javax.swing.JInternalFrame {
         try{
         String ciudad = txtCiudad.getText();//lo pones en una variable mas legible
         
-        MenuPrincipal.ciudades.add(ciudad);//lo agregamos al arrayList
+        Menu.ciudades.add(ciudad);//lo agregamos al arrayList
         
         }catch(java.util.NoSuchElementException error){
             System.out.println("Error de formato");
