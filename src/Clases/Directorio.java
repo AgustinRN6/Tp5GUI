@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DirectorioTelefonico {
+public class Directorio {
 
-    private String nombreD;
     private TreeMap<Long, Cliente> clientela = new TreeMap();
-    private ArrayList<Cliente> clientes = new ArrayList();
+    
 
-    public DirectorioTelefonico(String nombreD) {
-        this.nombreD = nombreD;
+    public Directorio() {
+      
     }
 
     public void agregarContacto(Cliente c, long numero) {
@@ -24,7 +23,7 @@ public class DirectorioTelefonico {
 
         for (Map.Entry<Long, Cliente> c : clientela.entrySet()) {
             if (c.getKey() == numero) {
-                System.out.println(c.toString());
+                System.out.println(c.getValue().toString());
                 cont++;
             }
         }
@@ -47,15 +46,13 @@ public class DirectorioTelefonico {
         }
     }
 
-    public void buscarContactos(String ciudad) {
+    public Cliente buscarContactos(String ciudad) {
         for (Cliente c : clientela.values()) {
             if (c.getCiudad().equals(ciudad)) {//si el valor coinicide con el parametor
-                clientes.add(c);//se agrega al arrayList
+                System.out.println(c);
             }
         }//luego retorna la lista con las personas que estan en determinada ciudad.
-        for(Cliente c: clientes){
-            System.out.println(c.toString());
-        }
+      return null;
     }
 
     public void borrarContacto(long numero) {

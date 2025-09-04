@@ -4,7 +4,7 @@ package Clases;
 
 public class Main {
     public static void main(String[] args){
-    DirectorioTelefonico t1 = new DirectorioTelefonico("Movistar");
+    Directorio t1 = new Directorio();
         Cliente c1 = new Cliente("Julio","Cesar",45677,"Villa Mercedez","Los inmigrantes");
         Cliente c2 = new Cliente("Pepe","Dominguez",49823,"San Luis","Los inmigrantes");
         Cliente c3 = new Cliente("Gustavo","Perez",47234,"San Luis","Los inmigrantes");

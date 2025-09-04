@@ -4,6 +4,9 @@
  */
 package Visual;
 
+import Clases.Directorio;
+import java.util.ArrayList;
+
 /**
  *
  * @author Agustin
@@ -26,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jdpEscritorio = new javax.swing.JDesktopPane();
         jmMenu = new javax.swing.JMenuBar();
         jmClientes = new javax.swing.JMenu();
         jmiAgregarCliente = new javax.swing.JMenuItem();
@@ -42,14 +45,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jdpEscritorioLayout = new javax.swing.GroupLayout(jdpEscritorio);
+        jdpEscritorio.setLayout(jdpEscritorioLayout);
+        jdpEscritorioLayout.setHorizontalGroup(
+            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 752, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jdpEscritorioLayout.setVerticalGroup(
+            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 342, Short.MAX_VALUE)
         );
 
@@ -99,6 +102,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCiudades.setText("Ciudades");
 
         jmiAgregarCiudad.setText("Agregar Ciudad");
+        jmiAgregarCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarCiudadActionPerformed(evt);
+            }
+        });
         jmCiudades.add(jmiAgregarCiudad);
 
         jmMenu.add(jmCiudades);
@@ -121,11 +129,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jdpEscritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jdpEscritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -152,6 +160,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         System.out.println(evt.getActionCommand());
         System.exit(0);
     }//GEN-LAST:event_jmiExitActionPerformed
+
+    private void jmiAgregarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarCiudadActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        AgregarCiudad vi = new AgregarCiudad();
+        vi.setVisible(true);
+        jdpEscritorio.add(vi);
+        jdpEscritorio.moveToFront(vi);
+    }//GEN-LAST:event_jmiAgregarCiudadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,9 +205,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    public static Directorio directorio = new Directorio();
+    public static ArrayList<String> ciudades = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jdpEscritorio;
     private javax.swing.JMenu jmCiudades;
     private javax.swing.JMenu jmClientes;
     private javax.swing.JMenu jmDirectorio;
