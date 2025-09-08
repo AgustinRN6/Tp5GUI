@@ -165,6 +165,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarClienteActionPerformed
         // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        BuscarPorCliente bc= new BuscarPorCliente();
+        bc.setVisible(true);
+        jdpEscritorio.add(bc);
+        jdpEscritorio.moveToFront(bc);
     }//GEN-LAST:event_jmiBuscarClienteActionPerformed
 
     private void jmiBuscarClientePorApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarClientePorApellidoActionPerformed
