@@ -4,22 +4,22 @@
  */
 package Visual;
 
-import java.util.Iterator;
 import Clases.*;
-import java.util.Map;
 import java.util.TreeMap;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author necoi
  */
 public class BuscarPorCliente extends javax.swing.JInternalFrame {
-
+    DefaultListModel<String> modeloLista = new DefaultListModel<>();
     /**
      * Creates new form BuscarPorCliente
      */
     public BuscarPorCliente() {
         initComponents();
+        llenarListaTelefonos();
     }
 
     /**
@@ -46,8 +46,8 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
         jtfCiudad = new javax.swing.JTextField();
         jtfDomicilio = new javax.swing.JTextField();
         jbSalir = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jspTelefonos = new javax.swing.JScrollPane();
+        jlTelefonos = new javax.swing.JList<>();
 
         jlBusqueda.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jlBusqueda.setText("Búsqueda por Clientes");
@@ -120,13 +120,13 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jlTelefonos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlTelefonos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jlTelefonosValueChanged(evt);
+            }
         });
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
+        jspTelefonos.setViewportView(jlTelefonos);
 
         javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
         PanelPrincipal.setLayout(PanelPrincipalLayout);
@@ -139,8 +139,8 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
                         .addComponent(jlTeléfono)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jtfBusquedaPorTel, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                            .addComponent(jspTelefonos)
+                            .addComponent(jtfBusquedaPorTel))
                         .addGap(30, 30, 30)
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(PanelPrincipalLayout.createSequentialGroup()
@@ -203,7 +203,7 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
                         .addGroup(PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlDomicilio)
                             .addComponent(jtfDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspTelefonos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addGap(15, 15, 15))
@@ -258,11 +258,39 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
         setVisible(false);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jlTelefonosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlTelefonosValueChanged
+        //Recoge el valor seleccionado del JList
+        String telSeleccionadoS = jlTelefonos.getSelectedValue();
+        
+        //Parsea el valor de String a Long
+        Long telSeleccionado = Long.parseLong(telSeleccionadoS);
+        
+        //Agrega los valores en los jTextField
+        int DNI = Menu.directorio.getClientela().get(telSeleccionado).getDni();
+        jtfDNI.setText(""+DNI);
+        jtfDNI.setEditable(false);
+        
+        String apellido = Menu.directorio.getClientela().get(telSeleccionado).getApellido();
+        jtfApellido.setText(apellido);
+        jtfApellido.setEditable(false);
+        
+        String nombre = Menu.directorio.getClientela().get(telSeleccionado).getNombre();
+        jtfNombre.setText(nombre);
+        jtfNombre.setEditable(false);
+        
+        String ciudad = Menu.directorio.getClientela().get(telSeleccionado).getCiudad();
+        jtfCiudad.setText(ciudad);
+        jtfCiudad.setEditable(false);
+        
+        String domicilio = Menu.directorio.getClientela().get(telSeleccionado).getDireccion();
+        jtfDomicilio.setText(domicilio);
+        jtfDomicilio.setEditable(false);
+
+    }//GEN-LAST:event_jlTelefonosValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlApellido;
     private javax.swing.JLabel jlBusqueda;
@@ -270,7 +298,9 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlDNI;
     private javax.swing.JLabel jlDomicilio;
     private javax.swing.JLabel jlNombre;
+    private javax.swing.JList<String> jlTelefonos;
     private javax.swing.JLabel jlTeléfono;
+    private javax.swing.JScrollPane jspTelefonos;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfBusquedaPorTel;
     private javax.swing.JTextField jtfCiudad;
@@ -280,9 +310,12 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private void llenarListaTelefonos() {
         
-        
-
-        
+        jlTelefonos.setModel(modeloLista);
+        for (Long tel : Menu.directorio.getClientela().keySet()) {
+            
+            modeloLista.addElement(Long.toString(tel));
+            
+        }
         
     }
 
