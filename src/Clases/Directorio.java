@@ -67,4 +67,11 @@ public class Directorio {
         clientela.remove(numero);//
         System.out.println("Contacto borrado");
     }
+    //METODO PARA DEVOLVER EL TREEMAP PRIVADO
+    public TreeMap<Long, Cliente> getClientela() {
+        return clientela;
+    }
+    
+    
+    
 }
