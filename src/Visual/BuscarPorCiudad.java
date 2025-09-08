@@ -4,17 +4,21 @@
  */
 package Visual;
 
-import Clases.Cliente;
+import Clases.Contacto;
 import java.util.Iterator;
 
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author Agustin
- */
+
+
 public class BuscarPorCiudad extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int fila, int columna){ //Metodo que permite editar filas o columna.
+        return false;//En este caso no
+    }
+    };
     String ciudad;
+    
+    
     /**
      * Creates new form BuscarPorCiuad
      */
@@ -40,7 +44,6 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtClientes = new javax.swing.JTable();
         btSalir = new javax.swing.JButton();
-        btCargar = new javax.swing.JButton();
 
         lbBuscarCliente.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         lbBuscarCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,15 +84,6 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        btCargar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btCargar.setForeground(new java.awt.Color(153, 153, 255));
-        btCargar.setText("Cargar");
-        btCargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCargarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,10 +94,7 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbElegirCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbCiudades)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbCiudades))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -120,10 +111,8 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
                         .addComponent(lbCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jcbElegirCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 175, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -158,8 +147,8 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
 
     private void jcbElegirCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbElegirCiudadItemStateChanged
         // TODO add your handling code here:
-        ciudad = String.valueOf(evt.getItem()) ;//lo utilizo para guardar el item seleccionado en la box
-        
+        ciudad = String.valueOf(jcbElegirCiudad.getSelectedItem()) ;//lo utilizo para guardar el item seleccionado en la jboxcombo
+        cargarClientes();
     }//GEN-LAST:event_jcbElegirCiudadItemStateChanged
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
@@ -167,15 +156,9 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         System.out.println(evt.getActionCommand());
         setVisible(false);
     }//GEN-LAST:event_btSalirActionPerformed
-
-    private void btCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCargarActionPerformed
-        // TODO add your handling code here:
-      cargarClientes(ciudad);
-    }//GEN-LAST:event_btCargarActionPerformed
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCargar;
     private javax.swing.JButton btSalir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -185,26 +168,27 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbCiudades;
     // End of variables declaration//GEN-END:variables
 private void cargarCombo() {
-        Iterator<String> c = Menu.ciudades.iterator();
-        while (c.hasNext()) {
-            String ciudadd = c.next();
+        for (String ciudadd : Menu.ciudades) {
             jcbElegirCiudad.addItem(ciudadd);
         }
     }
-
+    private void cargarClientes(){
+        for(Contacto cl: Menu.directorio.buscarContactos(ciudad)){//for each
+            //Armo las filas con los datos proporcionados del metodo buscarcontactos, que devuelve un arraylist
+        modelo.addRow(new Object[]{cl.getNombre(), cl.getApellido(), cl.getDni(), cl.getCiudad(), cl.getDireccion(),Menu.directorio.buscarTelefono(cl.getNombre())});
+        
+        }
+    }
     private void armarCabecera() {
+        modelo.addColumn("DNI");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("DNI");
         modelo.addColumn("Ciudad");
         modelo.addColumn("Direccion");
+        modelo.addColumn("Telefono");
         jtClientes.setModel(modelo);
     }
 
-    private void cargarClientes(String c) {
-        for (Cliente cc : Menu.directorio.buscarContactos(c)) {
-            modelo.addRow(new Object[]{cc.getNombre(), cc.getApellido(), cc.getDni(), cc.getCiudad(), cc.getDireccion()});
-        }
-
-    }
+   
+  
 }

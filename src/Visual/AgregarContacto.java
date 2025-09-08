@@ -4,7 +4,7 @@
  */
 package Visual;
 
-import Clases.Cliente;
+import Clases.Contacto;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
@@ -12,15 +12,15 @@ import javax.swing.JOptionPane;
  *
  * @author Agustin
  */
-public class VistaCliente extends javax.swing.JInternalFrame {
+public class AgregarContacto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Cliente
      */
-    String ciudad;//este int es para ver en que parte del Jbox clickeo y ponerlo de indice en el jcbElegirC.getITemAT(IND).
+    String ciudad;//se almacena el evento de jbox
     
     
-    public VistaCliente() {
+    public AgregarContacto() {
         initComponents();
         cargarCombo();
     }
@@ -66,9 +66,9 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         lbDomicilio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbDomicilio.setText("Domicilio");
 
-        jcbElegirC.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbElegirCItemStateChanged(evt);
+        jcbElegirC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbElegirCActionPerformed(evt);
             }
         });
 
@@ -217,17 +217,19 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             int Dni = Integer.parseInt(txtDNI.getText());
-            String nombre = txtNombre.getText(), apellido = txtApellido.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
             String domicilio = txtDomicilio.getText();
             Long numeroT = Long.valueOf(txtNumeroTelefonico.getText());
-            System.out.println(Dni + nombre + domicilio + ciudad);//muestra los datos por consola
+
             JOptionPane.showMessageDialog(null, "Cliente agregado");
             //instanciamos al clientes con los datos proporcionados
-            Cliente c = new Cliente(nombre, apellido, Dni, domicilio, ciudad);
-            Menu.directorio.agregarContacto(c, numeroT);//agregamos el numeroT(Key) y el Cliente(Value) en el arreglo(Map)
+            Contacto c = new Contacto(nombre, apellido, Dni, domicilio, ciudad);
+            //agregamos el numeroT(Key) y el Cliente(Value) en el arreglo(Map)
+            Menu.directorio.agregarContacto(c, numeroT);
+
         } catch (java.lang.NumberFormatException error) {
-            String c1 = "Recuerde que en la casilla de numero telefonico o dni, va solamente digitos.";
-            JOptionPane.showMessageDialog(null, c1);
+            JOptionPane.showMessageDialog(null, "Recuerde que en la casilla de numero telefonico o dni, " + "va solamente digitos.");
         } catch (java.lang.NullPointerException error) {
             JOptionPane.showMessageDialog(null, "Usted no ingreso nada en las casillas!!!!");
 
@@ -248,12 +250,13 @@ public class VistaCliente extends javax.swing.JInternalFrame {
         txtApellido.setText("");
         txtDomicilio.setText("");
         txtNumeroTelefonico.setText("");
+        ciudad ="";
     }//GEN-LAST:event_btNuevo
 
-    private void jcbElegirCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbElegirCItemStateChanged
+    private void jcbElegirCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbElegirCActionPerformed
         // TODO add your handling code here:
-        ciudad = (String) evt.getItem();
-    }//GEN-LAST:event_jcbElegirCItemStateChanged
+        ciudad= String.valueOf(jcbElegirC.getSelectedItem());
+    }//GEN-LAST:event_jcbElegirCActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,10 +280,8 @@ public class VistaCliente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 private void cargarCombo(){
-    Iterator<String> c = Menu.ciudades.iterator();
-    while(c.hasNext()){
-    String ciudadd= c.next();
-    jcbElegirC.addItem(ciudadd);
+    for (String ciudadd : Menu.ciudades) {
+        jcbElegirC.addItem(ciudadd);
     }
 }
 }
