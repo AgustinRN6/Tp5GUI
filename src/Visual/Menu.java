@@ -5,7 +5,7 @@
 package Visual;
 
 import Clases.Directorio;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -147,7 +147,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        VistaCliente vc= new VistaCliente();
+        AgregarContacto vc= new AgregarContacto();
         vc.setVisible(true);
         jdpEscritorio.add(vc);
         jdpEscritorio.moveToFront(vc);
@@ -229,8 +229,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
     }
+    //Directorio estatico y ArraList estatico
     public static Directorio directorio = new Directorio();
-    public static ArrayList<String> ciudades = new ArrayList();
+    public static HashSet<String> ciudades = new HashSet();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jdpEscritorio;
     private javax.swing.JMenu jmCiudades;

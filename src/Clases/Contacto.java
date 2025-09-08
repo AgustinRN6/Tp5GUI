@@ -1,14 +1,14 @@
 package Clases;
 
-public class Cliente {
+public class Contacto {
 
     private String nombre;
     private String apellido;
-    private int dni;
+    private Integer dni;
     private String ciudad;
     private String direccion;
 
-    public Cliente(String nombre, String apellido, int dni, String ciudad, String direccion) {
+    public Contacto(String nombre, String apellido, int dni, String ciudad, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -32,11 +32,11 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public int getDni() {
+    public Integer getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 
@@ -58,7 +58,7 @@ public class Cliente {
     
     @Override
     public String toString() {
-        return "Nombre: " + nombre + ", Dni: " + dni + ", Ciudad: " + ciudad + ", Direccion: " + direccion;
+        return "Nombre: " + nombre + ", Apellido: "+ apellido+", Dni: " + dni + ", Ciudad: " + ciudad + ", Direccion: " + direccion;
     }
     
 }
