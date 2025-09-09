@@ -5,8 +5,10 @@
 package Visual;
 
 import Clases.*;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +21,7 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
      */
     public BuscarPorCliente() {
         initComponents();
-        llenarListaTelefonos();
+        llenarListaTelefonos(-1L);
     }
 
     /**
@@ -59,6 +61,14 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
         jtfBusquedaPorTel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfBusquedaPorTelActionPerformed(evt);
+            }
+        });
+        jtfBusquedaPorTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfBusquedaPorTelKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfBusquedaPorTelKeyTyped(evt);
             }
         });
 
@@ -288,6 +298,28 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jlTelefonosValueChanged
 
+    private void jtfBusquedaPorTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBusquedaPorTelKeyTyped
+
+    }//GEN-LAST:event_jtfBusquedaPorTelKeyTyped
+
+    private void jtfBusquedaPorTelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBusquedaPorTelKeyReleased
+        try {
+            //Texto creandose en base a cada letra que se teclea
+            Long textoCreandose = Long.parseLong(jtfBusquedaPorTel.getText());
+
+            //Se limpia jlTelefonos (JList)
+            modeloLista.clear();
+
+            //Crea nueva Lista con lo ingresado        
+            llenarListaTelefonos(textoCreandose);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "Debe colocar el formato correcto");
+            jtfBusquedaPorTel.setText("");
+        }
+    }//GEN-LAST:event_jtfBusquedaPorTelKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
@@ -308,15 +340,62 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfDomicilio;
     private javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
-    private void llenarListaTelefonos() {
+    private void llenarListaTelefonos(Long telBusqueda) {
         
-        jlTelefonos.setModel(modeloLista);
-        for (Long tel : Menu.directorio.getClientela().keySet()) {
             
-            modeloLista.addElement(Long.toString(tel));
+            jlTelefonos.setModel(modeloLista);
+            for (Long tel : Menu.directorio.getClientela().keySet()) {
+
+                //Por un lado si telBusqueda es menor a 0 va a brindar todos los números 
+                //Si se ha buscado por número, entonces la lista se llenará unicamente con dichos telefonos
+                if (compararLong(telBusqueda, tel)) {
+                    modeloLista.addElement(Long.toString(tel));
+                }
+
+            }
+            
+           
+    }
+    
+    //Es un comparador del teléfono ingresado por jtfBusquedaPorTel, si da true, entonces coincide el número ingresado
+    private boolean compararLong(Long busqueda, Long buscado) {
+        
+        String busquedaS = Long.toString(busqueda);
+        String buscadoS = Long.toString(buscado);
+        int contador = 0;
+        if(busqueda < 0) {
+            return true;
+        } else {
+            try {
+
+                for (int i = 0; i < busquedaS.length(); i++) {
+
+                    if (buscadoS.charAt(i) == busquedaS.charAt(i)) {
+                        contador++;
+                    }
+                }
+
+                if (contador == busquedaS.length()) {
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+
+            } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+                return false;
+            }  
             
         }
+
+
         
+   
     }
+    
+    
 
 }
