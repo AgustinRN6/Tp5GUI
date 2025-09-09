@@ -241,6 +241,8 @@ public class BorrarCliente extends javax.swing.JInternalFrame {
         if (telKey != -1L) {
             Menu.directorio.borrarContacto(telKey);
             JOptionPane.showMessageDialog(null, "Se ha eliminado con exito");
+            modeloDni.clear(); //Para limpiar JList
+            llenarListaDni(); //para rellenar el JList
         }
         else
         {
