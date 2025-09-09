@@ -269,33 +269,40 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jlTelefonosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlTelefonosValueChanged
-        //Recoge el valor seleccionado del JList
-        String telSeleccionadoS = jlTelefonos.getSelectedValue();
         
-        //Parsea el valor de String a Long
-        Long telSeleccionado = Long.parseLong(telSeleccionadoS);
-        
-        //Agrega los valores en los jTextField
-        int DNI = Menu.directorio.getClientela().get(telSeleccionado).getDni();
-        jtfDNI.setText(""+DNI);
-        jtfDNI.setEditable(false);
-        
-        String apellido = Menu.directorio.getClientela().get(telSeleccionado).getApellido();
-        jtfApellido.setText(apellido);
-        jtfApellido.setEditable(false);
-        
-        String nombre = Menu.directorio.getClientela().get(telSeleccionado).getNombre();
-        jtfNombre.setText(nombre);
-        jtfNombre.setEditable(false);
-        
-        String ciudad = Menu.directorio.getClientela().get(telSeleccionado).getCiudad();
-        jtfCiudad.setText(ciudad);
-        jtfCiudad.setEditable(false);
-        
-        String domicilio = Menu.directorio.getClientela().get(telSeleccionado).getDireccion();
-        jtfDomicilio.setText(domicilio);
-        jtfDomicilio.setEditable(false);
+        try { 
+            //Recoge el valor seleccionado del JList
+            String telSeleccionadoS = jlTelefonos.getSelectedValue();
 
+            //Parsea el valor de String a Long
+            Long telSeleccionado = Long.valueOf(telSeleccionadoS);
+
+            //Agrega los valores en los jTextField
+            int DNI = Menu.directorio.getClientela().get(telSeleccionado).getDni();
+            jtfDNI.setText(""+DNI);
+            jtfDNI.setEditable(false);
+
+            String apellido = Menu.directorio.getClientela().get(telSeleccionado).getApellido();
+            jtfApellido.setText(apellido);
+            jtfApellido.setEditable(false);
+
+            String nombre = Menu.directorio.getClientela().get(telSeleccionado).getNombre();
+            jtfNombre.setText(nombre);
+            jtfNombre.setEditable(false);
+
+            String ciudad = Menu.directorio.getClientela().get(telSeleccionado).getCiudad();
+            jtfCiudad.setText(ciudad);
+            jtfCiudad.setEditable(false);
+
+            String domicilio = Menu.directorio.getClientela().get(telSeleccionado).getDireccion();
+            jtfDomicilio.setText(domicilio);
+            jtfDomicilio.setEditable(false);
+        
+        } catch (NumberFormatException e) {
+            
+            System.out.println("Casilla vacia");
+            
+        }
     }//GEN-LAST:event_jlTelefonosValueChanged
 
     private void jtfBusquedaPorTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBusquedaPorTelKeyTyped
@@ -304,11 +311,13 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
 
     private void jtfBusquedaPorTelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBusquedaPorTelKeyReleased
         try {
+            Long textoCreandose = -1L;
             //Texto creandose en base a cada letra que se teclea
-            Long textoCreandose = Long.parseLong(jtfBusquedaPorTel.getText());
-
-            //Se limpia jlTelefonos (JList)
-            modeloLista.clear();
+            if(!jtfBusquedaPorTel.getText().isEmpty())
+            {
+               textoCreandose = Long.valueOf(jtfBusquedaPorTel.getText()); 
+            }
+            
 
             //Crea nueva Lista con lo ingresado        
             llenarListaTelefonos(textoCreandose);
@@ -342,6 +351,8 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private void llenarListaTelefonos(Long telBusqueda) {
         
+            //Se limpia jlTelefonos (JList)
+            modeloLista.clear();
             
             jlTelefonos.setModel(modeloLista);
             for (Long tel : Menu.directorio.getClientela().keySet()) {
