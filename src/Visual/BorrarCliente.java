@@ -182,6 +182,7 @@ public class BorrarCliente extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.out.println(evt.getActionCommand());
+        dni = jlListaDni.getSelectedValue();//almacena el elemento seleccionado de la lista
         borrarContacto(dni);
         borrarDatos();
         
@@ -229,13 +230,22 @@ public class BorrarCliente extends javax.swing.JInternalFrame {
     }
 
     private void borrarContacto(Integer dni) {
-        for (Map.Entry<Long, Cliente> cl : Menu.directorio.clientela.entrySet()) {
-            if (cl.getValue().getDni().equals(dni)) {
-                Menu.directorio.borrarContacto(cl.getKey());
-                JOptionPane.showMessageDialog(null, "Se ha eliminado con exito");
+        
+        Long telKey = -1L;
+        for (Map.Entry<Long, Cliente> c : Menu.directorio.getClientela().entrySet()) {
+            if (c.getValue().getDni().equals(dni)) {
+                telKey = c.getKey(); //Sirve para saber la llave para borrar dicho contacto
             }
         }
         
+        if (telKey != -1L) {
+            Menu.directorio.borrarContacto(telKey);
+            JOptionPane.showMessageDialog(null, "Se ha eliminado con exito");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No se encuentra contacto para eliminar");
+        }        
     }
 
     private void llenarListaDni() {

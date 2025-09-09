@@ -131,6 +131,7 @@ public class BuscarPorCliente extends javax.swing.JInternalFrame {
         });
 
         jlTelefonos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlTelefonos.setName(""); // NOI18N
         jlTelefonos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jlTelefonosValueChanged(evt);
