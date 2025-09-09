@@ -53,12 +53,6 @@ public class Directorio {
         }//luego retorna la lista con las personas que estan en determinada ciudad.
         return clientes;
     }
-
-    //METODO QUE RETORNA LOS DATOS DEL ARREGLO CLIENTELA <TELEFONO, CLIENTE>.
-    public TreeMap<Long, Contacto> getClientesT() {
-        return clientela;
-    }
-
     //METODO QUE BORRA EL CONTACTO Y EL NUMERO DEL ARREGLO
     public void borrarContacto(long numero) {
         clientela.remove(numero);//

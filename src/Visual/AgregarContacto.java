@@ -216,7 +216,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         // TODO add your handling code here:
         try {
-            int Dni = Integer.parseInt(txtDNI.getText());
+            Integer Dni = Integer.valueOf(txtDNI.getText());
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             String domicilio = txtDomicilio.getText();
@@ -224,7 +224,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Cliente agregado");
             //instanciamos al clientes con los datos proporcionados
-            Contacto c = new Contacto(nombre, apellido, Dni, domicilio, ciudad);
+            Contacto c = new Contacto(nombre, apellido, Dni, ciudad, domicilio);
             //agregamos el numeroT(Key) y el Cliente(Value) en el arreglo(Map)
             Menu.directorio.agregarContacto(c, numeroT);
 
@@ -255,7 +255,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
 
     private void jcbElegirCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbElegirCActionPerformed
         // TODO add your handling code here:
-        ciudad= String.valueOf(jcbElegirC.getSelectedItem());
+        ciudad = (String) jcbElegirC.getSelectedItem();
     }//GEN-LAST:event_jcbElegirCActionPerformed
 
 

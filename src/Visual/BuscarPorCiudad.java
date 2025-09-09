@@ -6,6 +6,8 @@ package Visual;
 
 import Clases.Contacto;
 import java.util.Iterator;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +18,6 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         return false;//En este caso no
     }
     };
-    String ciudad;
     
     
     /**
@@ -38,7 +39,7 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lbBuscarCliente = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jpPanel = new javax.swing.JPanel();
         jcbElegirCiudad = new javax.swing.JComboBox<>();
         lbCiudades = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -50,8 +51,9 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         lbBuscarCliente.setText("Buscar Clientes de Directorio por Ciudad");
         lbBuscarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jpPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
+        jcbElegirCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija una ciudad" }));
         jcbElegirCiudad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbElegirCiudadItemStateChanged(evt);
@@ -84,30 +86,30 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpPanelLayout = new javax.swing.GroupLayout(jpPanel);
+        jpPanel.setLayout(jpPanelLayout);
+        jpPanelLayout.setHorizontalGroup(
+            jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPanelLayout.createSequentialGroup()
+                        .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbElegirCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbCiudades))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jpPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jpPanelLayout.setVerticalGroup(
+            jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPanelLayout.createSequentialGroup()
                         .addComponent(lbCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jcbElegirCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,23 +125,22 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(lbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -147,8 +148,10 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
 
     private void jcbElegirCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbElegirCiudadItemStateChanged
         // TODO add your handling code here:
-        ciudad = String.valueOf(jcbElegirCiudad.getSelectedItem()) ;//lo utilizo para guardar el item seleccionado en la jboxcombo
-        cargarClientes();
+      if(evt.getStateChange() == jcbElegirCiudad.getSelectedIndex()){
+          cargarClientes();
+      }
+      
     }//GEN-LAST:event_jcbElegirCiudadItemStateChanged
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
@@ -160,9 +163,9 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSalir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbElegirCiudad;
+    private javax.swing.JPanel jpPanel;
     private javax.swing.JTable jtClientes;
     private javax.swing.JLabel lbBuscarCliente;
     private javax.swing.JLabel lbCiudades;
@@ -173,10 +176,21 @@ private void cargarCombo() {
         }
     }
     private void cargarClientes(){
-        for(Contacto cl: Menu.directorio.buscarContactos(ciudad)){//for each
-            //Armo las filas con los datos proporcionados del metodo buscarcontactos, que devuelve un arraylist
-        modelo.addRow(new Object[]{cl.getNombre(), cl.getApellido(), cl.getDni(), cl.getCiudad(), cl.getDireccion(),Menu.directorio.buscarTelefono(cl.getNombre())});
+        borrarClientes();//borra la tabla e inicia con otros dato
+        System.out.println(jcbElegirCiudad.getSelectedItem());
+        String ciudad = (String)jcbElegirCiudad.getSelectedItem();
+        for(Contacto c: Menu.directorio.buscarContactos(ciudad)){
+              modelo.addRow(new Object[]{c.getDni(),c.getNombre(),c.getApellido(),c.getCiudad(),c.getDireccion(), Menu.directorio.buscarTelefono(c.getApellido())});
+        }
         
+    }
+    
+    private void borrarClientes(){
+    //para saber el indice de la fila
+    int a = modelo.getRowCount()-1;
+        for (int i = a; i >= 0; i--) {
+    //mientras i sea mayor o igual a cero se sigue el bucle
+            modelo.removeRow(i);//i representa el indice de la fila
         }
     }
     private void armarCabecera() {
@@ -185,7 +199,8 @@ private void cargarCombo() {
         modelo.addColumn("Apellido");
         modelo.addColumn("Ciudad");
         modelo.addColumn("Direccion");
-        modelo.addColumn("Telefono");
+        modelo.addColumn("TELEFONO");
+        
         jtClientes.setModel(modelo);
     }
 
