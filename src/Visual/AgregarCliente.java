@@ -4,7 +4,7 @@
  */
 package Visual;
 
-import Clases.Contacto;
+import Clases.Cliente;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Agustin
  */
-public class AgregarContacto extends javax.swing.JInternalFrame {
+public class AgregarCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Cliente
@@ -20,7 +20,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
     String ciudad;//se almacena el evento de jbox
     
     
-    public AgregarContacto() {
+    public AgregarCliente() {
         initComponents();
         cargarCombo();
     }
@@ -131,7 +131,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
         jLabel2.setText("Numero de Telefono");
 
         btGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btGuardar.setForeground(new java.awt.Color(153, 153, 255));
+        btGuardar.setForeground(new java.awt.Color(0, 153, 153));
         btGuardar.setText("Guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +140,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
         });
 
         btSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btSalir.setForeground(new java.awt.Color(153, 153, 255));
+        btSalir.setForeground(new java.awt.Color(0, 153, 153));
         btSalir.setText("Salir");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
         jLabel3.setText("Agregar Cliente");
 
         btNuevo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btNuevo.setForeground(new java.awt.Color(153, 153, 255));
+        btNuevo.setForeground(new java.awt.Color(0, 153, 153));
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +224,7 @@ public class AgregarContacto extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Cliente agregado");
             //instanciamos al clientes con los datos proporcionados
-            Contacto c = new Contacto(nombre, apellido, Dni, ciudad, domicilio);
+            Cliente c = new Cliente(nombre, apellido, Dni, ciudad, domicilio);
             //agregamos el numeroT(Key) y el Cliente(Value) en el arreglo(Map)
             Menu.directorio.agregarContacto(c, numeroT);
 

@@ -4,8 +4,9 @@
  */
 package Visual;
 
-import Clases.Contacto;
+import Clases.Cliente;
 import java.util.Map;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,7 +14,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Agustin
  */
 public class BuscarPorApellido extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo = new DefaultTableModel(){
+    
+    DefaultListModel<String> modeloL = new DefaultListModel<>();
+    private DefaultTableModel modelo = new DefaultTableModel(){
     public boolean isCellEditable(int fila, int columna){ //Metodo que permite editar filas o columna.
         return false;//En este caso no
     }
@@ -23,7 +26,9 @@ private DefaultTableModel modelo = new DefaultTableModel(){
      */
     public BuscarPorApellido() {
         initComponents();
+        llenarListaApellidos();
         armarCabecera();
+        
     }
 
     /**
@@ -36,16 +41,38 @@ private DefaultTableModel modelo = new DefaultTableModel(){
     private void initComponents() {
 
         lbTitulo = new javax.swing.JLabel();
+        jpPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jlListaApellido = new javax.swing.JList<>();
+        txtApellido = new javax.swing.JTextField();
+        lbAp = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtClientes = new javax.swing.JTable();
-        lbAp = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jlLista = new javax.swing.JList<>();
+        btSalir = new javax.swing.JButton();
 
         lbTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitulo.setText("Buscar Cliente por Apellido");
+        lbTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jpPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
+
+        jlListaApellido.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jlListaApellidoValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jlListaApellido);
+
+        txtApellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        txtApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidoActionPerformed(evt);
+            }
+        });
+
+        lbAp.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lbAp.setText("Apellido:");
 
         jtClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,61 +87,75 @@ private DefaultTableModel modelo = new DefaultTableModel(){
         ));
         jScrollPane1.setViewportView(jtClientes);
 
-        lbAp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbAp.setText("Apellido:");
-
-        txtApellido.addActionListener(new java.awt.event.ActionListener() {
+        btSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSalir.setForeground(new java.awt.Color(0, 153, 153));
+        btSalir.setText("Salir");
+        btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoActionPerformed(evt);
+                btSalirActionPerformed(evt);
             }
         });
 
-        jlLista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jlLista.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jlListaValueChanged(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jlLista);
+        javax.swing.GroupLayout jpPanelLayout = new javax.swing.GroupLayout(jpPanel);
+        jpPanel.setLayout(jpPanelLayout);
+        jpPanelLayout.setHorizontalGroup(
+            jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbAp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jpPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jpPanelLayout.setVerticalGroup(
+            jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPanelLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPanelLayout.createSequentialGroup()
+                        .addGroup(jpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbAp, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(203, 203, 203)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(191, 191, 191)
                 .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbAp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbAp, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -124,21 +165,31 @@ private DefaultTableModel modelo = new DefaultTableModel(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
 
-    private void jlListaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlListaValueChanged
+    private void jlListaApellidoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlListaApellidoValueChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlListaValueChanged
+        String apellSel = (String) jlListaApellido.getSelectedValue();
+        cargarDatos(apellSel);
+    }//GEN-LAST:event_jlListaApellidoValueChanged
+
+    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
+        // TODO add your handling code here:
+        System.out.println(evt.getActionCommand());
+        setVisible(false);
+    }//GEN-LAST:event_btSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> jlLista;
+    private javax.swing.JList<String> jlListaApellido;
+    private javax.swing.JPanel jpPanel;
     private javax.swing.JTable jtClientes;
     private javax.swing.JLabel lbAp;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JTextField txtApellido;
     // End of variables declaration//GEN-END:variables
-   private void armarCabecera() {
+    private void armarCabecera() {
         modelo.addColumn("DNI");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
@@ -147,9 +198,30 @@ private DefaultTableModel modelo = new DefaultTableModel(){
         modelo.addColumn("TELEFONO");
         jtClientes.setModel(modelo);
     }
-   private void llenarLista(){
-      for(Map.Entry<Long,Contacto> cl: Menu.directorio.clientela.entrySet()){
 
-      }
-   }
+    private void cargarDatos(String a) {
+        borrarDatos();
+        for (Map.Entry<Long, Cliente> cl : Menu.directorio.clientela.entrySet()) {
+            //si el apellido del arreglo es igual al que esta por parametro. pone sus datos en la tabla
+            if(cl.getValue().getApellido().equals(a)){
+                modelo.addRow(new Object[]{cl.getValue().getDni(), cl.getValue().getNombre(), cl.getValue().getApellido(), cl.getValue().getCiudad(), cl.getValue().getDireccion(), cl.getKey()});
+            }
+        }
+    }
+
+    private void borrarDatos() {
+        //el modelo me dice la cantidad de fila de la tabla. el indice empieza del 0.
+        int a = modelo.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void llenarListaApellidos() {
+        jlListaApellido.setModel(modeloL);
+        for (Map.Entry<Long, Cliente> cl : Menu.directorio.clientela.entrySet()) {
+            modeloL.addElement(cl.getValue().getApellido());
+        }
+    }
+
 }

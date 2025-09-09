@@ -1,18 +1,18 @@
 
 package Test;
 
-import Clases.Contacto;
+import Clases.Cliente;
 import Clases.Directorio;
 
 
 public class TestMain {
     public static void main(String[] args){
     Directorio t1 = new Directorio();
-        Contacto c1 = new Contacto("Julio","Cesar",45677,"Villa Mercedez","Los inmigrantes");
-        Contacto c2 = new Contacto("Pepe","Dominguez",49823,"San Luis","Los inmigrantes");
-        Contacto c3 = new Contacto("Gustavo","Perez",47234,"San Luis","Los inmigrantes");
-        Contacto c4 = new Contacto("Pedro","Dominguez",43454,"Villa Mercedez","Los inmigrantes");
-        Contacto c5 = new Contacto("Carlos","Jofre",43454,"La punta","Los inmigrantes");
+        Cliente c1 = new Cliente("Julio","Cesar",45677,"Villa Mercedez","Los inmigrantes");
+        Cliente c2 = new Cliente("Pepe","Dominguez",49823,"San Luis","Los inmigrantes");
+        Cliente c3 = new Cliente("Gustavo","Perez",47234,"San Luis","Los inmigrantes");
+        Cliente c4 = new Cliente("Pedro","Dominguez",43454,"Villa Mercedez","Los inmigrantes");
+        Cliente c5 = new Cliente("Carlos","Jofre",43454,"La punta","Los inmigrantes");
         //metodos directorio
         t1.agregarContacto(c1, 266510);
         t1.agregarContacto(c2, 25551);
@@ -25,7 +25,7 @@ public class TestMain {
         for(Long n:  t1.buscarTelefono("Dominguez") ){
             System.out.println("numeros :"+n.toString());
         }
-        for(Contacto c: t1.buscarContactos("San Luis")){
+        for(Cliente c: t1.buscarContactos("San Luis")){
             System.out.println(c.toString());
         }
         t1.borrarContacto(2342211);

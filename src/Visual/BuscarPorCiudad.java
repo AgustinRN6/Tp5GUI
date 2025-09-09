@@ -4,7 +4,7 @@
  */
 package Visual;
 
-import Clases.Contacto;
+import Clases.Cliente;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -46,12 +46,14 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         jtClientes = new javax.swing.JTable();
         btSalir = new javax.swing.JButton();
 
+        setForeground(java.awt.Color.lightGray);
+
         lbBuscarCliente.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         lbBuscarCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbBuscarCliente.setText("Buscar Clientes de Directorio por Ciudad");
         lbBuscarCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jpPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jpPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 2));
 
         jcbElegirCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija una ciudad" }));
         jcbElegirCiudad.addItemListener(new java.awt.event.ItemListener() {
@@ -61,7 +63,7 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         });
 
         lbCiudades.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbCiudades.setText("Ciudades");
+        lbCiudades.setText("Ciudades:");
 
         jtClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,7 +79,7 @@ public class BuscarPorCiudad extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtClientes);
 
         btSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btSalir.setForeground(new java.awt.Color(153, 153, 255));
+        btSalir.setForeground(new java.awt.Color(0, 153, 153));
         btSalir.setText("Salir");
         btSalir.setToolTipText("");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +181,7 @@ private void cargarCombo() {
         borrarClientes();//borra la tabla e inicia con otros dato
         System.out.println(jcbElegirCiudad.getSelectedItem());
         String ciudad = (String)jcbElegirCiudad.getSelectedItem();
-        for(Contacto c: Menu.directorio.buscarContactos(ciudad)){
+        for(Cliente c: Menu.directorio.buscarContactos(ciudad)){
               modelo.addRow(new Object[]{c.getDni(),c.getNombre(),c.getApellido(),c.getCiudad(),c.getDireccion(), Menu.directorio.buscarTelefono(c.getApellido())});
         }
         

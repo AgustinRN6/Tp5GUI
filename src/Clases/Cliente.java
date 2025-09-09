@@ -1,6 +1,6 @@
 package Clases;
 
-public class Contacto {
+public class Cliente {
 
     private String nombre;
     private String apellido;
@@ -8,7 +8,7 @@ public class Contacto {
     private String ciudad;
     private String direccion;
 
-    public Contacto(String nombre, String apellido, int dni, String ciudad, String direccion) {
+    public Cliente(String nombre, String apellido, int dni, String ciudad, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;

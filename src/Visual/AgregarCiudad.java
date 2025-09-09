@@ -41,14 +41,16 @@ public class AgregarCiudad extends javax.swing.JInternalFrame {
         lbAgregarCiudad.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
         lbAgregarCiudad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAgregarCiudad.setText("Agregar Ciudad");
-        lbAgregarCiudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbAgregarCiudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        lbNombreCiudad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbNombreCiudad.setForeground(new java.awt.Color(102, 102, 102));
+        lbNombreCiudad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbNombreCiudad.setForeground(new java.awt.Color(0, 153, 204));
         lbNombreCiudad.setText("Nombre de ciudad: ");
 
-        btGuardar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btGuardar.setForeground(new java.awt.Color(153, 153, 255));
+        txtCiudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204), 2));
+
+        btGuardar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btGuardar.setForeground(new java.awt.Color(0, 153, 153));
         btGuardar.setText("Guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,8 +58,8 @@ public class AgregarCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        btSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btSalir.setForeground(new java.awt.Color(153, 153, 255));
+        btSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btSalir.setForeground(new java.awt.Color(0, 153, 153));
         btSalir.setText("Salir");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +67,8 @@ public class AgregarCiudad extends javax.swing.JInternalFrame {
             }
         });
 
-        btNuevo.setForeground(new java.awt.Color(153, 153, 255));
+        btNuevo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btNuevo.setForeground(new java.awt.Color(0, 153, 153));
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,21 +91,21 @@ public class AgregarCiudad extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(lbAgregarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(lbNombreCiudad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                        .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(lbAgregarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbAgregarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombreCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))

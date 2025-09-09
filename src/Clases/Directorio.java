@@ -8,13 +8,13 @@ import java.util.TreeMap;
 public class Directorio {
 
     //Arreglo de tipo Map con la key= llave y el valor igual a objetos de tipo Cliente
-    public TreeMap<Long, Contacto> clientela = new TreeMap();
+    public TreeMap<Long, Cliente> clientela = new TreeMap();
 
     public Directorio() {
     }
 
     //METODO PARA AGREGAR UN CLIENTE JUNTO CON SU NUMERO TELEFONICO
-    public void agregarContacto(Contacto c, long numero) {
+    public void agregarContacto(Cliente c, long numero) {
                 clientela.put(numero, c);//añadimos el cliente al arreglo
                 System.out.println("Contacto agregado");
     }
@@ -22,7 +22,7 @@ public class Directorio {
     //METODO PARA BUSCAR EL CONTACTO DE UNA PERSONA MEDIANTE EL NUMERO TELEFONICO
     public void buscarContacto(long numero) {
         int cont = 0;
-        for (Map.Entry<Long, Contacto> c : clientela.entrySet()) {
+        for (Map.Entry<Long, Cliente> c : clientela.entrySet()) {
             if (c.getKey() == numero) {
                 System.out.println(c.getValue().toString());
                 cont++;
@@ -35,7 +35,7 @@ public class Directorio {
     //METODO PARA BUSCAR EL CONTACTO DE UNA PERSONA MEDIANTE EL APELLIDO
     public HashSet<Long> buscarTelefono(String apellido) {
         HashSet<Long> numeros = new HashSet();
-        for (Map.Entry<Long, Contacto> c : clientela.entrySet()) {
+        for (Map.Entry<Long, Cliente> c : clientela.entrySet()) {
             if (c.getValue().getApellido().equals(apellido)) {
                 numeros.add(c.getKey());
             }
@@ -44,9 +44,9 @@ public class Directorio {
     }
 
     //METODO QUE RETORNA UN ARRAYLIST CON TODOS LAS PERSONAS SITUADAS EN UNA MISMA CIUDAD
-    public ArrayList<Contacto> buscarContactos(String ciudad) {
-        ArrayList<Contacto> clientes = new ArrayList();
-        for (Contacto c : clientela.values()) {
+    public ArrayList<Cliente> buscarContactos(String ciudad) {
+        ArrayList<Cliente> clientes = new ArrayList();
+        for (Cliente c : clientela.values()) {
             if (c.getCiudad().equals(ciudad)) {
                 clientes.add(c);
             }
@@ -59,7 +59,7 @@ public class Directorio {
         System.out.println("Contacto borrado");
     }
     //METODO PARA DEVOLVER EL TREEMAP PRIVADO
-    public TreeMap<Long, Contacto> getClientela() {
+    public TreeMap<Long, Cliente> getClientela() {
         return clientela;
     }
     

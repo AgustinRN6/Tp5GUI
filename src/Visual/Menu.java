@@ -49,11 +49,11 @@ public class Menu extends javax.swing.JFrame {
         jdpEscritorio.setLayout(jdpEscritorioLayout);
         jdpEscritorioLayout.setHorizontalGroup(
             jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 908, Short.MAX_VALUE)
+            .addGap(0, 998, Short.MAX_VALUE)
         );
         jdpEscritorioLayout.setVerticalGroup(
             jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
+            .addGap(0, 603, Short.MAX_VALUE)
         );
 
         jmClientes.setText("Clientes");
@@ -75,6 +75,11 @@ public class Menu extends javax.swing.JFrame {
         jmClientes.add(jmiBuscarCliente);
 
         jmiBorrarCliente.setText("Borrar Cliente");
+        jmiBorrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBorrarClienteActionPerformed(evt);
+            }
+        });
         jmClientes.add(jmiBorrarCliente);
 
         jmMenu.add(jmClientes);
@@ -129,15 +134,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jdpEscritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jdpEscritorio)
         );
 
         pack();
@@ -147,7 +148,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        AgregarContacto vc= new AgregarContacto();
+        AgregarCliente vc= new AgregarCliente();
         vc.setVisible(true);
         jdpEscritorio.add(vc);
         jdpEscritorio.moveToFront(vc);
@@ -175,6 +176,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiBuscarClientePorApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBuscarClientePorApellidoActionPerformed
         // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        BuscarPorApellido ba = new BuscarPorApellido();
+        ba.setVisible(true);
+        jdpEscritorio.add(ba);
+        jdpEscritorio.moveToFront(ba);
     }//GEN-LAST:event_jmiBuscarClientePorApellidoActionPerformed
 
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
@@ -191,6 +198,16 @@ public class Menu extends javax.swing.JFrame {
         jdpEscritorio.add(vi);
         jdpEscritorio.moveToFront(vi);
     }//GEN-LAST:event_jmiAgregarCiudadActionPerformed
+
+    private void jmiBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBorrarClienteActionPerformed
+        // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        BorrarCliente brc = new BorrarCliente();
+        brc.setVisible(true);
+        jdpEscritorio.add(brc);
+        jdpEscritorio.moveToFront(brc);
+    }//GEN-LAST:event_jmiBorrarClienteActionPerformed
 
     /**
      * @param args the command line arguments
